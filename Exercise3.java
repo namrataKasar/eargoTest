@@ -1,15 +1,3 @@
-/*
- * Exercise 3:
-	This is a 2 part exercise. If you can do part A or Part B or Both.
-	Write a function to find out the best Buying and Selling day for maximum gain from daily stock
-	prices of the last 10 days. Following are 2 rules.
-	Part A:
-	1. Buy first
-	2. You can only buy once and sell once
-	Part B:
-	1. You buy first and then sell
-	2. Buy and sell as many times as possible. Goal is to maximize profit.
- * */
 import java.util.List;
 import java.util.ArrayList;
 
@@ -31,14 +19,25 @@ public class Exercise3 {
 			System.out.println("For Testcase " + (i+1));
 			TradeDays tradeDays = findMaximumGainA(testcases[i]);
 			
-			System.out.println("Part A : Buying day : " + tradeDays.buyingDay + " Selling day : " + tradeDays.sellingDay);
-			
+			System.out.println("Part A : ");
+            if(tradeDays.buyingDay == 0 && tradeDays.sellingDay == 0){
+                System.out.println("Maximum gain can not be obtained");
+            }
+            else{
+                System.out.println("Buying Day = " + tradeDays.buyingDay + " and Selling Day = " + tradeDays.sellingDay);
+            }
+            
 			List<TradeDays> tradDaysList = findMaximumGainB(testcases[i]);
 			
 			System.out.println("Part B :");
-			for(TradeDays tempTradeDays : tradDaysList) {
-				System.out.println("Buying day : " + tempTradeDays.buyingDay + " Selling day : " + tempTradeDays.sellingDay);
-			}
+            if(tradDaysList.size() == 0){
+                System.out.println("Maximum gain can not be obtained");
+            }
+            else{
+                for(TradeDays tempTradeDays : tradDaysList) {
+                    System.out.println("Buying Day = " + tempTradeDays.buyingDay + " and Selling Day = " + tempTradeDays.sellingDay);
+                }
+            }
 			
 			System.out.println();
 		}
@@ -46,9 +45,13 @@ public class Exercise3 {
 	}
 	
     /**
+     * Returns TradeDays object with buying and selling day to obtain maximum gain
+     * from daily stock prices of last 10 days.
+     * This method considers only single transaction i.e. stock can only be bought
+     * once and sold once.
      * 
-     * @param prices
-     * @return TradeDays
+     * @param prices An array of daily stock prices of last 10 days 
+     * @return       TradeDays object with buying and selling dat
      */
 	private static TradeDays findMaximumGainA(int[] prices) {
 		
@@ -74,16 +77,22 @@ public class Exercise3 {
 				maximumGain = prices[day] - minimumPrice;
 			}
 		}
-		tradeDays.buyingDay = buyingDay;
-		tradeDays.sellingDay = sellingDay;
+        if(buyingDay > 0 && sellingDay > 0){
+            tradeDays.buyingDay = buyingDay;
+            tradeDays.sellingDay = sellingDay;
+        }
 		
 		return tradeDays;
 	}
 	
     /**
+     * Returns a list of TradeDays objects to obtain maximum gain
+     * from daily stock prices of last 10 days.
+     * This method considers multiple transactions i.e. stocks can be bought and sold
+     * multiple time. But, stock can be bought only after previous stock is sold.
      * 
-     * @param prices
-     * @return list of tradeDays
+     * @param prices An array of daily stock prices of last 10 days
+     * @return       List of TradeDays objects
      */
 	private static List<TradeDays> findMaximumGainB(int[] prices) {
 		
@@ -118,7 +127,7 @@ public class Exercise3 {
 	}
 	
     /**
-     * Class to maintaind buing day and selling day
+     * Class to maintaine buying day and selling day
      */
 	static class TradeDays{
 		int buyingDay = 0;

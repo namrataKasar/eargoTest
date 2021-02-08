@@ -1,12 +1,4 @@
 /*
-Exercise 2:
-Write an SQL Statement to transform data from Input to output format. Input and output table
-are provided below.
-Under the output table format you need to replace ?? with actual record counts while submitting
-your answers.
-*/
-
-/*
 Following SQL queries create input and output tables.
 */
 

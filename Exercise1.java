@@ -1,13 +1,4 @@
 
-/*
- * Exercise 1:
-Write a function to calculate change for a given number (number represents cents)
-The function will return list, vector or collection of numbers representing the number of
-quarters(25), dimes(10), nickels (5), pennies (1) that would yield the correct change.
-# Example:
-# For 83¢, the function will return 3 quarters, 0 dimes, 1 nickel, and 3 pennies.
- * */
-
 import java.util.Map;
 import java.util.HashMap;
 
@@ -27,9 +18,11 @@ public class Exercise1 {
 	}
 	
     /**
+     * Returns a map with number of coins per each change.
+     * This method returns a map with 0 coins per change if amount is less than or equal to 0
      * 
-     * @param amount : Amount
-     * @return Map<String, Integer>: Map with key as change(coin) name and value as number of those coins  
+     * @param amount Amount whose change is to be calculated
+     * @return       Map with key as change(coin) name and value as number of those coins  
      */
 	private static Map<String, Integer> calculateChange(int amount) {
 		
